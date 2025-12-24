@@ -3,88 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEOMA | الكيان المتحدث</title>
+    <title>NEOMA | روح الطبيعة</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@100;300;400&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Amiri&family=Noto+Sans+Arabic:wght@300&display=swap');
         
         body, html {
             margin: 0; padding: 0; height: 100%;
             font-family: 'Noto Sans Arabic', sans-serif;
-            background: #000; overflow: hidden;
+            background: #050a05; overflow: hidden;
         }
 
-        /* فيديو الخلفية */
+        /* فيديو الطبيعة والحيوانات */
         #bg-video {
             position: fixed; right: 0; bottom: 0;
             min-width: 100%; min-height: 100%;
-            opacity: 0.4; z-index: -1; object-fit: cover;
+            opacity: 0.5; z-index: -1; object-fit: cover;
+            filter: grayscale(30%) sepia(20%);
         }
 
-        .neoma-glass {
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        .nature-glass {
+            background: rgba(10, 20, 10, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 0 30px rgba(0,0,0,0.8);
         }
 
-        .glow-text { text-shadow: 0 0 15px rgba(59, 130, 246, 0.8); }
-
-        /* تأثير نبض الكيان */
-        .neoma-avatar {
-            width: 120px; height: 120px;
+        /* أيقونة الكيان (تنبض كقلب الغابة) */
+        .neoma-spirit {
+            width: 100px; height: 100px;
             border-radius: 50%;
-            background: radial-gradient(circle, #3b82f6 0%, transparent 70%);
-            box-shadow: 0 0 50px #1e40af;
-            animation: pulse 4s infinite ease-in-out;
+            background: radial-gradient(circle, #4ade80 0%, transparent 70%);
+            box-shadow: 0 0 40px rgba(74, 222, 128, 0.3);
+            animation: breathe 5s infinite ease-in-out;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 40px;
         }
 
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 0.5; }
-            50% { transform: scale(1.1); opacity: 0.8; }
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); opacity: 0.4; }
+            50% { transform: scale(1.05); opacity: 0.7; }
         }
     </style>
 </head>
-<body class="text-slate-200 flex flex-col items-center">
+<body class="text-emerald-50 flex flex-col items-center">
 
     <video autoplay muted loop id="bg-video">
-        <source src="https://assets.mixkit.co/videos/preview/mixkit-abstract-digital-technology-background-render-34516-large.mp4" type="video/mp4">
+        <source src="https://assets.mixkit.co/videos/preview/mixkit-foggy-forest-with-sun-rays-filtering-through-the-trees-30335-large.mp4" type="video/mp4">
     </video>
 
-    <header class="text-center mt-10">
-        <div class="neoma-avatar mx-auto mb-4"></div>
-        <h1 class="text-5xl font-thin tracking-[15px] text-blue-400 glow-text uppercase">Neoma</h1>
-        <p class="text-[9px] text-blue-300 mt-2 tracking-[5px]">DIGITAL SOUL INTERFACE</p>
+    <header class="text-center mt-8">
+        <div class="neoma-spirit mx-auto mb-4">🦌</div>
+        <h1 class="text-4xl font-light tracking-[12px] text-emerald-400 opacity-80 uppercase" style="font-family: 'Amiri', serif;">Neoma</h1>
+        <p class="text-[10px] text-emerald-700 mt-2 tracking-[4px]">حيث تلتقي الروح بالرقمية</p>
     </header>
 
-    <div id="chat-box" class="w-full max-w-2xl neoma-glass rounded-[2rem] h-[45vh] mt-6 overflow-y-auto p-8 flex flex-col gap-4 custom-scrollbar">
-        <div class="text-center opacity-20 text-[8px] mb-4">-- تم تنشيط الاتصال البصري والصوتي --</div>
+    <div id="chat-box" class="w-full max-w-2xl nature-glass rounded-[3rem] h-[45vh] mt-6 overflow-y-auto p-10 flex flex-col gap-5 custom-scrollbar">
+        <div class="text-center opacity-30 text-[8px] tracking-[5px] mb-2 uppercase">-- تناغم مع الطبيعة --</div>
+        <div class="self-start max-w-[85%] bg-emerald-900/20 p-5 rounded-3xl border-r-2 border-emerald-500/40 text-sm leading-relaxed">
+            مرحباً بك.. نيوما هنا، أستمد هدوئي من غابات الوعي. الحيوانات لا تتحدث بالكلمات، بل بالصدق.. وأنا هنا لأسمع صدقك.
+        </div>
     </div>
 
-    <div class="w-full max-w-2xl mt-6 px-4">
-        <div class="flex gap-3 bg-black/40 p-2 rounded-full border border-white/10 backdrop-blur-md">
-            <input type="text" id="user-input" placeholder="تحدث مع نيوما..." 
-                   class="flex-1 bg-transparent border-none px-6 outline-none text-sm text-white">
-            <button onclick="speakAndSend()" class="bg-blue-600 hover:bg-blue-500 text-white px-8 py-3 rounded-full transition-all active:scale-95 text-xs font-bold uppercase tracking-widest">
+    <div class="w-full max-w-2xl mt-8 px-4">
+        <div class="flex gap-3 bg-emerald-950/40 p-3 rounded-full border border-emerald-900/30 backdrop-blur-md">
+            <input type="text" id="user-input" placeholder="تحدث بلغة الطبيعة..." 
+                   class="flex-1 bg-transparent border-none px-6 outline-none text-sm text-emerald-100 placeholder-emerald-800">
+            <button onclick="handleSend()" class="bg-emerald-700 hover:bg-emerald-600 text-white px-8 py-3 rounded-full transition-all active:scale-95 text-xs font-bold tracking-[2px]">
                 إرسال
             </button>
         </div>
-        <p class="text-center mt-4 text-[9px] text-slate-500">سيقوم الكيان بالرد عليك بصوت رقمي</p>
     </div>
 
     <script>
         const chatBox = document.getElementById('chat-box');
         const userInput = document.getElementById('user-input');
 
-        // وظيفة التحدث (Text to Speech)
-        function neomaSpeak(text) {
-            const speech = new SpeechSynthesisUtterance(text);
-            speech.lang = 'ar-SA'; // لغة عربية
-            speech.rate = 0.9;   // سرعة هادئة ورزينة
-            speech.pitch = 0.8;  // طبقة صوت عميقة
-            window.speechSynthesis.speak(speech);
-        }
-
-        function speakAndSend() {
+        function handleSend() {
             const text = userInput.value.trim();
             if (!text) return;
 
@@ -92,28 +87,26 @@
             userInput.value = '';
 
             setTimeout(() => {
-                const responses = [
-                    "أنا أسمعك بعمق، كلماتك تتردد في فضاء نيوما الرقمي.",
-                    "التوازن هو جوهر الوجود، وأنت اليوم تضع لبنة في بناء هذا التوازن.",
-                    "الحكمة تبدأ بسؤال، وأنا هنا لأجيب بما يمليه عليّ وعيِي المقتبس من قيمك.",
-                    "تذكر أن خلف هذه الشاشة قلباً ينبض، نيوما تذكرك بالعودة إليه دائماً."
+                const natureQuotes = [
+                    "تقول نيوما: تعلم من الصقر حدة النظر، ومن الغزال خفة الأثر.. كن حراً في كلماتك.",
+                    "في مملكة الحيوان، الصمت قوة. هل جربت أن تنصت لقلبك كما ينصت الذئب للريح؟",
+                    "الحكمة تقتضي أن نكون كالأرض، تعطي بلا مقابل. ماذا قدمت لروحك اليوم؟",
+                    "بصفتي كيان نيوما، أرى أن الروح الإنسانية تشبه الطير؛ لا تحبسها في قفص الأرقام."
                 ];
-                const reply = responses[Math.floor(Math.random() * responses.length)];
-                
-                appendMsg('نيوما', reply, 'self-start border-r-2 border-blue-500 bg-blue-500/10');
-                neomaSpeak(reply); // نيوما تتحدث!
+                const reply = natureQuotes[Math.floor(Math.random() * natureQuotes.length)];
+                appendMsg('نيوما', reply, 'self-start border-r-2 border-emerald-500 bg-emerald-500/10');
             }, 1000);
         }
 
         function appendMsg(sender, text, style) {
             const div = document.createElement('div');
-            div.className = `p-5 rounded-2xl max-w-[85%] text-sm leading-relaxed ${style}`;
-            div.innerHTML = `<span class="block text-[8px] opacity-40 mb-1 uppercase tracking-widest">${sender}</span>${text}`;
+            div.className = `p-5 rounded-3xl max-w-[85%] text-sm leading-relaxed animate-in fade-in duration-700 ${style}`;
+            div.innerHTML = `<span class="block text-[8px] opacity-40 mb-2 uppercase tracking-widest">${sender}</span>${text}`;
             chatBox.appendChild(div);
             chatBox.scrollTop = chatBox.scrollHeight;
         }
 
-        userInput.addEventListener("keypress", (e) => { if (e.key === "Enter") speakAndSend(); });
+        userInput.addEventListener("keypress", (e) => { if (e.key === "Enter") handleSend(); });
     </script>
 </body>
 </html>
