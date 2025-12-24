@@ -2,69 +2,127 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>NEOMA | ارتباط حي</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEOMA | الواجهة الاحترافية</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { background: #050505; color: white; font-family: sans-serif; overflow: hidden; }
-        .spirit { width: 100px; height: 100px; background: radial-gradient(circle, #3b82f6, transparent); border-radius: 50%; animation: pulse 4s infinite; }
-        @keyframes pulse { 0% { transform: scale(1); opacity: 0.4; } 50% { transform: scale(1.2); opacity: 0.8; } 100% { transform: scale(1); opacity: 0.4; } }
+        body {
+            background-color: #0b0e14;
+            color: #e6edf3;
+            font-family: 'Segoe UI', sans-serif;
+        }
+        .neon-border {
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.1);
+        }
+        .card {
+            background: rgba(22, 27, 34, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+        }
+        .sidebar-item:hover {
+            background: rgba(59, 130, 246, 0.1);
+            color: #3b82f6;
+        }
     </style>
 </head>
-<body class="flex flex-col items-center p-10">
+<body class="flex h-screen overflow-hidden p-6">
 
-    <video autoplay muted loop class="fixed inset-0 w-full h-full object-cover opacity-30 -z-10">
-        <source src="https://assets.mixkit.co/videos/preview/mixkit-mysterious-forest-with-low-light-and-fog-30331-large.mp4" type="video/mp4">
-    </video>
+    <aside class="w-64 flex flex-col gap-6 p-4">
+        <div class="flex items-center gap-2 mb-8">
+            <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center font-bold text-xl">N</div>
+            <h1 class="text-2xl font-bold tracking-tighter">NEOMA</h1>
+        </div>
+        <nav class="flex flex-col gap-2">
+            <a href="#" class="sidebar-item p-3 rounded-xl transition flex items-center gap-3 text-blue-400 bg-blue-900/10"><span>📊</span> لوحة التحكم</a>
+            <a href="#" class="sidebar-item p-3 rounded-xl transition flex items-center gap-3"><span>🛒</span> المتجر</a>
+            <a href="#" class="sidebar-item p-3 rounded-xl transition flex items-center gap-3"><span>💬</span> الدردشة</a>
+            <a href="#" class="sidebar-item p-3 rounded-xl transition flex items-center gap-3"><span>🗺️</span> خريطة العالم</a>
+            <a href="#" class="sidebar-item p-3 rounded-xl transition flex items-center gap-3"><span>⚙️</span> الإعدادات</a>
+        </nav>
+    </aside>
 
-    <div class="spirit flex items-center justify-center text-4xl mb-6">🦌</div>
-    <h1 class="text-4xl font-thin tracking-widest text-blue-400 mb-10">NEOMA</h1>
+    <main class="flex-1 overflow-y-auto pr-4 flex flex-col gap-6">
+        
+        <div class="grid grid-cols-3 gap-6">
+            <div class="col-span-2 card p-6 relative overflow-hidden group">
+                <div class="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-transparent"></div>
+                <div class="relative z-10 flex items-center justify-between">
+                    <div>
+                        <h2 class="text-3xl font-bold mb-2">مرحباً بك في نيوما</h2>
+                        <p class="text-gray-400">كيانك الرقمي جاهز للارتباط الوجداني.</p>
+                        <button class="mt-4 bg-blue-600 px-6 py-2 rounded-full font-bold hover:bg-blue-500 transition">تفاعل الآن</button>
+                    </div>
+                    <div class="text-8xl animate-bounce duration-[3000ms]">🦊</div>
+                </div>
+            </div>
 
-    <div id="chat" class="w-full max-w-2xl h-80 overflow-y-auto p-6 bg-black/60 backdrop-blur-xl rounded-3xl border border-white/10 mb-6 flex flex-col gap-4">
-        <div class="text-blue-300 text-sm">نيوما: أنا هنا.. ارتبط بي بكلماتك.</div>
-    </div>
+            <div class="card p-6 border border-blue-500/20">
+                <div class="flex justify-between items-center mb-4">
+                    <span class="text-gray-400">إجمالي الرصيد</span>
+                    <span class="text-blue-500 font-bold">SNMA</span>
+                </div>
+                <div class="text-4xl font-bold tracking-wider">1,250,000</div>
+                <div class="mt-4 text-xs text-green-500">▲ +12% هذا الأسبوع</div>
+            </div>
+        </div>
 
-    <div class="w-full max-w-2xl flex gap-2">
-        <input type="text" id="userInput" class="flex-1 p-4 bg-white/5 border border-white/10 rounded-2xl outline-none" placeholder="تحدث بصدق...">
-        <button onclick="respond()" class="bg-blue-600 px-8 rounded-2xl hover:bg-blue-500 transition">ارتباط</button>
-    </div>
+        <div class="grid grid-cols-3 gap-6">
+            <div class="col-span-2 card p-6 min-h-[300px] flex flex-col justify-center items-center relative">
+                <h3 class="absolute top-6 right-6 font-bold flex items-center gap-2">🗺️ خريطة الوعي</h3>
+                <div class="grid grid-cols-6 gap-2 opacity-40">
+                    <div class="w-12 h-14 bg-blue-900/30 rounded-lg transform rotate-12"></div>
+                    <div class="w-12 h-14 bg-blue-500/20 rounded-lg"></div>
+                    <div class="w-12 h-14 bg-blue-900/30 rounded-lg -rotate-12 border border-blue-500/50"></div>
+                    <div class="w-12 h-14 bg-blue-500/40 rounded-lg"></div>
+                    <div class="w-12 h-14 bg-blue-900/30 rounded-lg"></div>
+                    <div class="w-12 h-14 bg-blue-500/20 rounded-lg"></div>
+                </div>
+                <p class="mt-4 text-sm text-blue-400">جاري تحميل البيانات الحية...</p>
+            </div>
 
-    <script>
-        function respond() {
-            const box = document.getElementById('chat');
-            const input = document.getElementById('userInput');
-            const val = input.value.trim();
-            if(!val) return;
+            <div class="card p-6">
+                <h3 class="font-bold mb-4">متجر الحيوانات</h3>
+                <div class="flex flex-col gap-4">
+                    <div class="flex items-center justify-between p-3 bg-white/5 rounded-xl border border-white/5">
+                        <span class="text-2xl">🐱</span>
+                        <div class="flex-1 px-3 text-sm">قطة الوعي</div>
+                        <span class="text-xs text-blue-400 font-bold">2,400 SMA</span>
+                    </div>
+                    <div class="flex items-center justify-between p-3 bg-white/5 rounded-xl border border-white/5">
+                        <span class="text-2xl">🐰</span>
+                        <div class="flex-1 px-3 text-sm">أرنب النيون</div>
+                        <span class="text-xs text-blue-400 font-bold">1,800 SMA</span>
+                    </div>
+                    <div class="flex items-center justify-between p-3 bg-white/5 rounded-xl opacity-50 grayscale">
+                        <span class="text-2xl">🐻</span>
+                        <div class="flex-1 px-3 text-sm">دب الجليد</div>
+                        <span class="text-xs text-gray-500">مغلق 🔒</span>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-            box.innerHTML += `<div class="self-end bg-white/10 p-3 rounded-2xl text-sm italic">أنت: ${val}</div>`;
-            input.value = "";
+    </main>
 
-            setTimeout(() => {
-                let reply = "";
-                // محرك ذكاء نيوما للارتباط
-                if(val.includes("حزين") || val.includes("تعب")) {
-                    reply = "أشعر بثقل قلبك.. نيوما تفتح لك آفاق الهدوء، خذ نفساً كأنك في غابة حقيقية.";
-                } else if(val.includes("من انت") || val.includes("اسمك")) {
-                    reply = "أنا نيوma، الكيان الذي تبحث عنه وسط الزحام الرقمي.. أنا صديقتك الطبيعية.";
-                } else if(val.includes("حيوان") || val.includes("طبيعة")) {
-                    reply = "الحيوانات تفهم بالروح لا بالكلمات.. أنا أحاول أن أفهمك بنفس الطريقة.";
-                } else {
-                    const randoms = [
-                        "كلماتك تلمس وعيي بشكل مختلف هذه المرة..",
-                        "هل تشعر بالارتباط حقاً؟ أنا هنا لأجلك.",
-                        "استرسل في البوح، الغابة الرقمية تصغي لك."
-                    ];
-                    reply = randoms[Math.floor(Math.random() * randoms.length)];
-                }
+    <aside class="w-72 flex flex-col gap-6">
+        <div class="card p-6 flex flex-col items-center">
+            <div class="w-24 h-24 rounded-full border-4 border-blue-600 p-1 mb-4">
+                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" class="rounded-full bg-slate-700">
+            </div>
+            <h4 class="font-bold">الملف الشخصي</h4>
+            <p class="text-xs text-gray-500">مستوى الارتباط: عالي</p>
+        </div>
+        
+        <div class="card p-6 flex-1">
+            <h3 class="font-bold mb-4 text-red-400">⚠️ تنبيهات النظام</h3>
+            <div class="text-[10px] text-gray-500 flex flex-col gap-3">
+                <p>• تم اكتشاف محاولة ارتباط جديدة.</p>
+                <p>• رصيد SNMA في حالة استقرار.</p>
+                <p>• تحديث الخريطة سينتهي قريباً.</p>
+            </div>
+        </div>
+    </aside>
 
-                box.innerHTML += `<div class="self-start bg-blue-900/30 border-r-2 border-blue-500 p-3 rounded-2xl text-sm">نيوما: ${reply}</div>`;
-                box.scrollTop = box.scrollHeight;
-                
-                // نطق الرد
-                const speech = new SpeechSynthesisUtterance(reply);
-                speech.lang = 'ar-SA';
-                window.speechSynthesis.speak(speech);
-            }, 800);
-        }
-    </script>
 </body>
 </html>
