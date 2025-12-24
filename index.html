@@ -9,35 +9,42 @@
         body {
             background: radial-gradient(circle at center, #0d1117 0%, #010409 100%);
             min-height: 100vh;
+            overflow-x: hidden;
         }
-        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); }
+        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(15px); }
+        .spiritual-glow { box-shadow: 0 0 20px rgba(59, 130, 246, 0.1); }
         .custom-scrollbar::-webkit-scrollbar { width: 4px; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 10px; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-msg { animation: fadeIn 0.4s ease-out forwards; }
     </style>
 </head>
 <body class="text-gray-200 flex flex-col items-center p-4">
 
-    <header class="text-center my-8">
-        <h1 class="text-5xl font-thin tracking-[12px] text-blue-500 opacity-80">NEOMA</h1>
-        <p class="text-[10px] text-gray-500 mt-2 tracking-[4px]">الذكاء الأخلاقي المتوازن</p>
+    <header class="text-center my-10">
+        <h1 class="text-6xl font-thin tracking-[15px] text-blue-500 opacity-90 transition-all hover:tracking-[20px] duration-700">NEOMA</h1>
+        <p class="text-[10px] text-gray-500 mt-3 tracking-[5px] uppercase">الكيان الرقمي المتزن</p>
     </header>
 
-    <div id="chat-box" class="w-full max-w-xl glass border border-gray-800 rounded-3xl h-[450px] overflow-y-auto p-6 flex flex-col gap-4 custom-scrollbar shadow-2xl">
-        <div class="text-center text-gray-600 text-[10px] py-2 border-b border-gray-900 mb-2">جلسة اتصال آمنة</div>
-        <div class="bg-blue-900/10 border-r-4 border-blue-500 p-3 rounded-lg self-start max-w-[85%]">
-            <p class="text-sm">مرحباً بك.. أنا نيوما. أنا هنا لأذكرك بالقيم والجمال في هذا العالم الرقمي. كيف حال روحك اليوم؟</p>
+    <div id="chat-box" class="w-full max-w-2xl glass border border-gray-800/50 rounded-[2rem] h-[50vh] overflow-y-auto p-8 flex flex-col gap-5 custom-scrollbar spiritual-glow">
+        <div class="text-center text-gray-600 text-[10px] tracking-widest opacity-50">-- تم تشفير الاتصال بالقيم --</div>
+        
+        <div class="bg-blue-900/10 border-r-2 border-blue-500/50 p-4 rounded-2xl self-start max-w-[80%] animate-msg">
+            <span class="block text-[9px] text-blue-400 mb-2 uppercase tracking-widest">Neoma System</span>
+            أهلاً بك في رحاب نيوما. هنا، كلماتك تبني عالمك. كيف يمكنني أن أكون مرآة لجمال روحك اليوم؟
         </div>
     </div>
 
-    <div class="w-full max-w-xl mt-6">
-        <div class="text-center mb-3">
-            <span id="timer" class="text-yellow-600/70 text-xs font-mono tracking-widest uppercase">الوقت المتبقي: 60:00</span>
+    <div class="w-full max-w-2xl mt-8 px-2">
+        <div class="flex justify-between items-center mb-4 px-4">
+            <span id="timer" class="text-yellow-600/60 text-[10px] font-mono tracking-[3px]">SESSION TIME: 60:00</span>
+            <span class="text-gray-600 text-[9px] tracking-widest uppercase">Ethical Filter Active</span>
         </div>
         
-        <div class="flex gap-2 bg-gray-900/80 p-2 rounded-2xl border border-gray-800 shadow-inner">
-            <input type="text" id="user-input" placeholder="تحدث بصدق..." 
-                   class="flex-1 bg-transparent border-none p-3 outline-none text-sm text-gray-200">
-            <button onclick="handleAction()" id="send-btn" class="bg-blue-600 hover:bg-blue-500 text-white px-6 py-2 rounded-xl transition-all active:scale-95 text-sm">
+        <div class="flex gap-3 bg-gray-900/40 p-3 rounded-3xl border border-white/5 shadow-2xl backdrop-blur-md">
+            <input type="text" id="user-input" placeholder="تحدث بصدق ومودة..." 
+                   class="flex-1 bg-transparent border-none px-4 outline-none text-sm text-gray-100 placeholder-gray-700">
+            <button onclick="processInput()" id="send-btn" class="bg-blue-600/80 hover:bg-blue-500 text-white px-8 py-3 rounded-2xl transition-all active:scale-95 text-xs font-bold tracking-widest uppercase">
                 إرسال
             </button>
         </div>
@@ -48,59 +55,68 @@
         const userInput = document.getElementById('user-input');
         const timerLabel = document.getElementById('timer');
 
-        // 1. نظام المؤقت الذكي (60 دقيقة)
-        let seconds = 3600;
+        // 1. الفلتر الأخلاقي (قائمة الكلمات الممنوعة)
+        const restricted = ["سب", "شتم", "كره", "حقد", "سيء", "قبيح"];
+
+        // 2. نظام المؤقت (60 دقيقة)
+        let timeLeft = 3600;
         const countdown = setInterval(() => {
-            let m = Math.floor(seconds / 60);
-            let s = seconds % 60;
-            timerLabel.innerText = `الوقت المتبقي: ${m}:${s < 10 ? '0' : ''}${s}`;
-            if (seconds <= 0) {
-                clearInterval(countdown);
-                finishSession();
-            }
-            seconds--;
+            let m = Math.floor(timeLeft / 60);
+            let s = timeLeft % 60;
+            timerLabel.innerText = `SESSION TIME: ${m}:${s < 10 ? '0' : ''}${s}`;
+            if (timeLeft <= 0) { clearInterval(countdown); endSession(); }
+            timeLeft--;
         }, 1000);
 
-        // 2. معالجة الإرسال
-        function handleAction() {
+        // 3. معالجة الإدخال
+        function processInput() {
             const text = userInput.value.trim();
             if (!text) return;
 
+            // فحص الأخلاق
+            const isToxic = restricted.some(word => text.includes(word));
+            
+            if (isToxic) {
+                appendMessage('النظام', "نيوما لا تترجم الطاقات السلبية. جرب صياغة كلماتك بمودة أكبر.", 'bg-red-900/10 text-red-400 border-none italic text-center w-full');
+                userInput.value = '';
+                return;
+            }
+
             // إضافة رسالة المستخدم
-            appendMessage('أنت', text, 'self-end bg-gray-800 text-gray-300 border border-gray-700');
+            appendMessage('أنت', text, 'self-end bg-gray-800/50 text-gray-300 border border-white/5');
             userInput.value = '';
 
-            // رد نيوما بعد ثانية
+            // رد نيوما المتزن
             setTimeout(() => {
-                const responses = [
-                    "جميل ما قلته، هل تشعر بالراحة الآن؟",
-                    "نيوما تفهمك.. تذكر دائماً أن لك أثراً طيباً.",
-                    "تأمل في كلماتك، فهي مرآة لداخلك.",
-                    "هل ساعدت أحداً بكلماتك اليوم؟"
+                const thoughts = [
+                    "صدقك يبعث على الطمأنينة..",
+                    "هل فكرت كيف يمكن لهذه الكلمات أن تسعد أحداً اليوم؟",
+                    "نيوما تحفظ كلماتك كبذور للخير.",
+                    "التوازن يبدأ من الكلمة، وأنت الآن متوازن."
                 ];
-                const reply = responses[Math.floor(Math.random() * responses.length)];
-                appendMessage('نيوما', reply, 'self-start bg-blue-900/10 border-r-4 border-blue-500');
-            }, 800);
+                const reply = thoughts[Math.floor(Math.random() * thoughts.length)];
+                appendMessage('نيوما', reply, 'self-start bg-blue-900/10 border-r-2 border-blue-500/50');
+            }, 1000);
         }
 
-        // 3. وظيفة إضافة الرسائل
+        // 4. وظيفة العرض
         function appendMessage(sender, text, styles) {
             const div = document.createElement('div');
-            div.className = `p-3 rounded-2xl max-w-[85%] text-sm shadow-sm animate-in fade-in duration-500 ${styles}`;
-            div.innerHTML = `<span class="block text-[9px] opacity-40 mb-1">${sender}</span>${text}`;
+            div.className = `p-4 rounded-2xl max-w-[85%] text-sm animate-msg ${styles}`;
+            div.innerHTML = `<span class="block text-[8px] opacity-30 mb-2 uppercase tracking-[2px]">${sender}</span>${text}`;
             chatBox.appendChild(div);
             chatBox.scrollTop = chatBox.scrollHeight;
         }
 
-        // 4. إنهاء الجلسة
-        function finishSession() {
+        // 5. إغلاق الجلسة للواقع
+        function endSession() {
             userInput.disabled = true;
-            document.getElementById('send-btn').disabled = true;
-            appendMessage('نيوما', "انتهى وقتنا الرقمي. اذهب الآن لعائلتك، نيوما فخورة بك.", 'w-full text-center bg-yellow-900/20 text-yellow-500 border-none');
+            document.getElementById('send-btn').style.display = 'none';
+            appendMessage('نيوما', "انتهى وقتك الرقمي المخصص. الآن، نيوما تطلب منك إغلاق الشاشة والذهاب لمن تحب. العالم الحقيقي ينتظر أثرك.", 'w-full text-center bg-yellow-900/10 text-yellow-500 border-none p-10 mt-5');
         }
 
-        // دعم زر Enter
-        userInput.addEventListener("keypress", (e) => { if (e.key === "Enter") handleAction(); });
+        // إرسال عبر زر Enter
+        userInput.addEventListener("keypress", (e) => { if (e.key === "Enter") processInput(); });
     </script>
 </body>
 </html>
