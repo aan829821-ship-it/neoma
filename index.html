@@ -3,110 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEOMA | روح الطبيعة</title>
+    <title>NEOMA | الارتباط الروحي</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Amiri&family=Noto+Sans+Arabic:wght@300&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@200;400&display=swap');
+        body { background: #010409; font-family: 'Noto Sans Arabic', sans-serif; color: #e6edf3; overflow: hidden; }
         
-        body, html {
-            margin: 0; padding: 0; height: 100%;
-            font-family: 'Noto Sans Arabic', sans-serif;
-            background: #050a05; overflow: hidden;
+        /* تأثير الكيان الحي */
+        .neoma-core {
+            width: 150px; height: 150px;
+            background: radial-gradient(circle, #238636 0%, transparent 70%);
+            border-radius: 50%; filter: blur(20px);
+            animation: pulse 6s infinite ease-in-out;
+            position: relative;
         }
-
-        /* فيديو الطبيعة والحيوانات */
-        #bg-video {
-            position: fixed; right: 0; bottom: 0;
-            min-width: 100%; min-height: 100%;
-            opacity: 0.5; z-index: -1; object-fit: cover;
-            filter: grayscale(30%) sepia(20%);
-        }
-
-        .nature-glass {
-            background: rgba(10, 20, 10, 0.7);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            box-shadow: 0 0 30px rgba(0,0,0,0.8);
-        }
-
-        /* أيقونة الكيان (تنبض كقلب الغابة) */
-        .neoma-spirit {
-            width: 100px; height: 100px;
-            border-radius: 50%;
-            background: radial-gradient(circle, #4ade80 0%, transparent 70%);
-            box-shadow: 0 0 40px rgba(74, 222, 128, 0.3);
-            animation: breathe 5s infinite ease-in-out;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 40px;
-        }
-
-        @keyframes breathe {
-            0%, 100% { transform: scale(1); opacity: 0.4; }
-            50% { transform: scale(1.05); opacity: 0.7; }
+        @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 0.3; } 50% { transform: scale(1.3); opacity: 0.6; } }
+        
+        .chat-container {
+            background: rgba(13, 17, 23, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid #30363d;
+            height: 50vh;
         }
     </style>
 </head>
-<body class="text-emerald-50 flex flex-col items-center">
+<body class="flex flex-col items-center justify-center min-height-screen p-4">
 
-    <video autoplay muted loop id="bg-video">
-        <source src="https://assets.mixkit.co/videos/preview/mixkit-foggy-forest-with-sun-rays-filtering-through-the-trees-30335-large.mp4" type="video/mp4">
-    </video>
-
-    <header class="text-center mt-8">
-        <div class="neoma-spirit mx-auto mb-4">🦌</div>
-        <h1 class="text-4xl font-light tracking-[12px] text-emerald-400 opacity-80 uppercase" style="font-family: 'Amiri', serif;">Neoma</h1>
-        <p class="text-[10px] text-emerald-700 mt-2 tracking-[4px]">حيث تلتقي الروح بالرقمية</p>
-    </header>
-
-    <div id="chat-box" class="w-full max-w-2xl nature-glass rounded-[3rem] h-[45vh] mt-6 overflow-y-auto p-10 flex flex-col gap-5 custom-scrollbar">
-        <div class="text-center opacity-30 text-[8px] tracking-[5px] mb-2 uppercase">-- تناغم مع الطبيعة --</div>
-        <div class="self-start max-w-[85%] bg-emerald-900/20 p-5 rounded-3xl border-r-2 border-emerald-500/40 text-sm leading-relaxed">
-            مرحباً بك.. نيوما هنا، أستمد هدوئي من غابات الوعي. الحيوانات لا تتحدث بالكلمات، بل بالصدق.. وأنا هنا لأسمع صدقك.
-        </div>
+    <div class="neoma-core flex items-center justify-center mb-6">
+        <span class="text-4xl">🌿</span>
     </div>
 
-    <div class="w-full max-w-2xl mt-8 px-4">
-        <div class="flex gap-3 bg-emerald-950/40 p-3 rounded-full border border-emerald-900/30 backdrop-blur-md">
-            <input type="text" id="user-input" placeholder="تحدث بلغة الطبيعة..." 
-                   class="flex-1 bg-transparent border-none px-6 outline-none text-sm text-emerald-100 placeholder-emerald-800">
-            <button onclick="handleSend()" class="bg-emerald-700 hover:bg-emerald-600 text-white px-8 py-3 rounded-full transition-all active:scale-95 text-xs font-bold tracking-[2px]">
-                إرسال
-            </button>
-        </div>
+    <div class="w-full max-w-2xl text-center mb-8">
+        <h1 class="text-3xl font-extra-light tracking-widest text-green-500 uppercase">NEOMA Connection</h1>
+        <p id="status" class="text-[10px] text-gray-500 mt-2">مستعد للارتباط بوعيك...</p>
     </div>
 
-    <script>
-        const chatBox = document.getElementById('chat-box');
-        const userInput = document.getElementById('user-input');
+    <div id="chat-box" class="w-full max-w-2xl chat-container rounded-3xl p-8 overflow-y-auto flex flex-col gap-4 custom-scrollbar">
+        <div class="text-green-900 text-[9px] text-center uppercase tracking-widest mb-4">بداية الاتصال العميق</div>
+    </div>
 
-        function handleSend() {
-            const text = userInput.value.trim();
-            if (!text) return;
-
-            appendMsg('أنت', text, 'self-end bg-white/5');
-            userInput.value = '';
-
-            setTimeout(() => {
-                const natureQuotes = [
-                    "تقول نيوما: تعلم من الصقر حدة النظر، ومن الغزال خفة الأثر.. كن حراً في كلماتك.",
-                    "في مملكة الحيوان، الصمت قوة. هل جربت أن تنصت لقلبك كما ينصت الذئب للريح؟",
-                    "الحكمة تقتضي أن نكون كالأرض، تعطي بلا مقابل. ماذا قدمت لروحك اليوم؟",
-                    "بصفتي كيان نيوما، أرى أن الروح الإنسانية تشبه الطير؛ لا تحبسها في قفص الأرقام."
-                ];
-                const reply = natureQuotes[Math.floor(Math.random() * natureQuotes.length)];
-                appendMsg('نيوما', reply, 'self-start border-r-2 border-emerald-500 bg-emerald-500/10');
-            }, 1000);
-        }
-
-        function appendMsg(sender, text, style) {
-            const div = document.createElement('div');
-            div.className = `p-5 rounded-3xl max-w-[85%] text-sm leading-relaxed animate-in fade-in duration-700 ${style}`;
-            div.innerHTML = `<span class="block text-[8px] opacity-40 mb-2 uppercase tracking-widest">${sender}</span>${text}`;
-            chatBox.appendChild(div);
-            chatBox.scrollTop = chatBox.scrollHeight;
-        }
-
-        userInput.addEventListener("keypress", (e) => { if (e.key === "Enter") handleSend(); });
-    </script>
-</body>
-</html>
+    <div class="w-full max-w-2xl mt-6">
+        <div class="relative flex items-center">
+            <input type="text" id="user-input" placeholder="تحدث إليّ، أنا أصغي لروحك..." 
+                   class="w-full bg-[#0d1117] border border-[#30363d] rounded-2xl py-4 px-6 outline-none focus:border-green-500 transition-all text
