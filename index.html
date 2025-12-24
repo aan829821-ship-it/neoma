@@ -3,126 +3,239 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEOMA | الواجهة الاحترافية</title>
+    <title>NEOMA OS | النظام المتكامل</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body {
-            background-color: #0b0e14;
-            color: #e6edf3;
-            font-family: 'Segoe UI', sans-serif;
-        }
-        .neon-border {
-            border: 1px solid rgba(59, 130, 246, 0.3);
-            box-shadow: 0 0 15px rgba(59, 130, 246, 0.1);
-        }
-        .card {
-            background: rgba(22, 27, 34, 0.8);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-        }
-        .sidebar-item:hover {
-            background: rgba(59, 130, 246, 0.1);
-            color: #3b82f6;
-        }
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;600&display=swap');
+        body { background-color: #0b0e14; color: #e6edf3; font-family: 'Noto Sans Arabic', sans-serif; }
+        .card { background: rgba(22, 27, 34, 0.9); backdrop-filter: blur(12px); border-radius: 24px; border: 1px solid rgba(255,255,255,0.05); transition: all 0.3s; }
+        .sidebar-item { cursor: pointer; transition: 0.2s; }
+        .sidebar-item.active { background: rgba(59, 130, 246, 0.15); color: #3b82f6; border-right: 3px solid #3b82f6; }
+        .hidden-section { display: none; }
     </style>
 </head>
-<body class="flex h-screen overflow-hidden p-6">
+<body class="flex h-screen overflow-hidden p-6 gap-6">
 
-    <aside class="w-64 flex flex-col gap-6 p-4">
-        <div class="flex items-center gap-2 mb-8">
-            <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center font-bold text-xl">N</div>
-            <h1 class="text-2xl font-bold tracking-tighter">NEOMA</h1>
+    <aside class="w-64 flex flex-col gap-8 p-2">
+        <div class="flex items-center gap-3 px-4">
+            <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center shadow-lg shadow-blue-900/40">N</div>
+            <h1 class="text-xl font-bold tracking-widest">NEOMA</h1>
         </div>
-        <nav class="flex flex-col gap-2">
-            <a href="#" class="sidebar-item p-3 rounded-xl transition flex items-center gap-3 text-blue-400 bg-blue-900/10"><span>📊</span> لوحة التحكم</a>
-            <a href="#" class="sidebar-item p-3 rounded-xl transition flex items-center gap-3"><span>🛒</span> المتجر</a>
-            <a href="#" class="sidebar-item p-3 rounded-xl transition flex items-center gap-3"><span>💬</span> الدردشة</a>
-            <a href="#" class="sidebar-item p-3 rounded-xl transition flex items-center gap-3"><span>🗺️</span> خريطة العالم</a>
-            <a href="#" class="sidebar-item p-3 rounded-xl transition flex items-center gap-3"><span>⚙️</span> الإعدادات</a>
+        <nav class="flex flex-col gap-2" id="main-nav">
+            <div onclick="showSection('dash')" id="nav-dash" class="sidebar-item active p-4 rounded-xl flex items-center gap-3">📊 لوحة التحكم</div>
+            <div onclick="showSection('market')" id="nav-market" class="sidebar-item p-4 rounded-xl flex items-center gap-3">🛒 المتجر</div>
+            <div onclick="showSection('chat')" id="nav-chat" class="sidebar-item p-4 rounded-xl flex items-center gap-3">💬 الدردشة الذكية</div>
         </nav>
     </aside>
 
-    <main class="flex-1 overflow-y-auto pr-4 flex flex-col gap-6">
+    <main class="flex-1 flex flex-col gap-6 overflow-y-auto">
         
-        <div class="grid grid-cols-3 gap-6">
-            <div class="col-span-2 card p-6 relative overflow-hidden group">
-                <div class="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-transparent"></div>
-                <div class="relative z-10 flex items-center justify-between">
+        <section id="sect-dash" class="flex flex-col gap-6">
+            <div class="grid grid-cols-3 gap-6">
+                <div class="col-span-2 card p-8 flex items-center justify-between bg-gradient-to-l from-blue-900/20 to-transparent">
                     <div>
-                        <h2 class="text-3xl font-bold mb-2">مرحباً بك في نيوما</h2>
-                        <p class="text-gray-400">كيانك الرقمي جاهز للارتباط الوجداني.</p>
-                        <button class="mt-4 bg-blue-600 px-6 py-2 rounded-full font-bold hover:bg-blue-500 transition">تفاعل الآن</button>
+                        <h2 class="text-3xl font-bold mb-2">مرحباً، أيها المرتبط</h2>
+                        <p class="text-slate-400" id="dash-text">نيوما في حالة استقرار تام وتنتظر إشارتك.</p>
+                        <button onclick="showSection('chat')" class="mt-6 bg-blue-600 px-8 py-3 rounded-full font-bold shadow-lg hover:scale-105 transition">ابدأ المحادثة</button>
                     </div>
-                    <div class="text-8xl animate-bounce duration-[3000ms]">🦊</div>
+                    <div class="text-8xl animate-pulse">🦊</div>
+                </div>
+                <div class="card p-8 border-t-4 border-blue-500">
+                    <span class="text-slate-500 text-sm">الرصيد المتوفر</span>
+                    <div class="text-4xl font-bold mt-2" id="balance">1,250,000</div>
+                    <div class="text-blue-500 text-xs mt-2 font-mono">SNMA TOKEN</div>
                 </div>
             </div>
+        </section>
 
-            <div class="card p-6 border border-blue-500/20">
-                <div class="flex justify-between items-center mb-4">
-                    <span class="text-gray-400">إجمالي الرصيد</span>
-                    <span class="text-blue-500 font-bold">SNMA</span>
+        <section id="sect-market" class="hidden-section flex flex-col gap-6">
+            <h2 class="text-2xl font-bold px-2">متجر الكيانات الحية</h2>
+            <div class="grid grid-cols-3 gap-6">
+                <div class="card p-6 flex flex-col items-center gap-4 text-center">
+                    <span class="text-5xl">🐱</span>
+                    <h3 class="font-bold">قطة النيون</h3>
+                    <button onclick="buy(5000)" class="w-full py-2 bg-blue-600/20 text-blue-400 rounded-xl hover:bg-blue-600 hover:text-white transition">5,000 SNMA</button>
                 </div>
-                <div class="text-4xl font-bold tracking-wider">1,250,000</div>
-                <div class="mt-4 text-xs text-green-500">▲ +12% هذا الأسبوع</div>
+                <div class="card p-6 flex flex-col items-center gap-4 text-center">
+                    <span class="text-5xl">🐰</span>
+                    <h3 class="font-bold">أرنب السرعة</h3>
+                    <button onclick="buy(3500)" class="w-full py-2 bg-blue-600/20 text-blue-400 rounded-xl hover:bg-blue-600 hover:text-white transition">3,500 SNMA</button>
+                </div>
             </div>
-        </div>
+        </section>
 
-        <div class="grid grid-cols-3 gap-6">
-            <div class="col-span-2 card p-6 min-h-[300px] flex flex-col justify-center items-center relative">
-                <h3 class="absolute top-6 right-6 font-bold flex items-center gap-2">🗺️ خريطة الوعي</h3>
-                <div class="grid grid-cols-6 gap-2 opacity-40">
-                    <div class="w-12 h-14 bg-blue-900/30 rounded-lg transform rotate-12"></div>
-                    <div class="w-12 h-14 bg-blue-500/20 rounded-lg"></div>
-                    <div class="w-12 h-14 bg-blue-900/30 rounded-lg -rotate-12 border border-blue-500/50"></div>
-                    <div class="w-12 h-14 bg-blue-500/40 rounded-lg"></div>
-                    <div class="w-12 h-14 bg-blue-900/30 rounded-lg"></div>
-                    <div class="w-12 h-14 bg-blue-500/20 rounded-lg"></div>
-                </div>
-                <p class="mt-4 text-sm text-blue-400">جاري تحميل البيانات الحية...</p>
+        <section id="sect-chat" class="hidden-section card flex flex-col h-full overflow-hidden">
+            <div id="chat-display" class="flex-1 p-6 overflow-y-auto flex flex-col gap-4 bg-black/20">
+                <div class="bg-blue-600/10 p-4 rounded-2xl self-start max-w-[80%]">نيوما: أنا مرتبطة بوعيك الآن، كيف يمكنني مساعدتك؟</div>
             </div>
-
-            <div class="card p-6">
-                <h3 class="font-bold mb-4">متجر الحيوانات</h3>
-                <div class="flex flex-col gap-4">
-                    <div class="flex items-center justify-between p-3 bg-white/5 rounded-xl border border-white/5">
-                        <span class="text-2xl">🐱</span>
-                        <div class="flex-1 px-3 text-sm">قطة الوعي</div>
-                        <span class="text-xs text-blue-400 font-bold">2,400 SMA</span>
-                    </div>
-                    <div class="flex items-center justify-between p-3 bg-white/5 rounded-xl border border-white/5">
-                        <span class="text-2xl">🐰</span>
-                        <div class="flex-1 px-3 text-sm">أرنب النيون</div>
-                        <span class="text-xs text-blue-400 font-bold">1,800 SMA</span>
-                    </div>
-                    <div class="flex items-center justify-between p-3 bg-white/5 rounded-xl opacity-50 grayscale">
-                        <span class="text-2xl">🐻</span>
-                        <div class="flex-1 px-3 text-sm">دب الجليد</div>
-                        <span class="text-xs text-gray-500">مغلق 🔒</span>
-                    </div>
-                </div>
+            <div class="p-4 bg-white/5 flex gap-2">
+                <input type="text" id="chat-input" class="flex-1 bg-transparent border border-white/10 rounded-xl px-4 outline-none" placeholder="اكتب هنا...">
+                <button onclick="sendMessage()" class="bg-blue-600 px-6 py-2 rounded-xl">ارسل</button>
             </div>
-        </div>
+        </section>
 
     </main>
 
-    <aside class="w-72 flex flex-col gap-6">
-        <div class="card p-6 flex flex-col items-center">
-            <div class="w-24 h-24 rounded-full border-4 border-blue-600 p-1 mb-4">
-                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" class="rounded-full bg-slate-700">
-            </div>
-            <h4 class="font-bold">الملف الشخصي</h4>
-            <p class="text-xs text-gray-500">مستوى الارتباط: عالي</p>
+    <script>
+        let currentBalance = 1250000;
+
+        // وظيفة التنقل بين الأقسام
+        function showSection(name) {
+            // إخفاء الكل
+            document.querySelectorAll('section').forEach(s => s.classList.add('hidden-section'));
+            document.querySelectorAll('.sidebar-item').forEach(i => i.classList.remove('active'));
+            
+            // إظهار المطلوب
+            document.getElementById('sect-' + name).classList.remove('hidden-section');
+            document.getElementById('nav-' + name).classList.add('active');
+        }
+
+        // وظيفة الشراء
+        function buy(price) {
+            if(currentBalance >= price) {
+                currentBalance -= price;
+                document.getElementById('balance').innerText = currentBalance.toLocaleString();
+                alert("تم الشراء بنجاح! تفقد حديقتك الرقمية.");
+            } else {
+                alert("الرصيد غير كافٍ.");
+            }
+        }
+
+        // وظيفة الدردشة داخل الواجهة
+        function sendMessage() {
+            const input = document.getElementById('chat-input');
+            const display = document.getElementById('chat-display');
+            if(!input.value) return;
+
+            display.innerHTML += `<div class="bg-white/5 p-4 rounded-2xl self-end max-w-[80%]">${input.value}</div>`;
+            
+            setTimeout(() => {
+                display.innerHTML += `<div class="bg-blue-600/10 p-4 rounded-2xl self-start max-w-[80%] border-r-2 border-blue-500">نيوما: هذا الارتباط ينمو مع كل كلمة تقولها.</div>`;
+                display.scrollTop = display.scrollHeight;
+            }, 1000);
+            
+            input.value = "";
+        }
+    </script>
+</body>
+</html><!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEOMA OS | النظام المتكامل</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;600&display=swap');
+        body { background-color: #0b0e14; color: #e6edf3; font-family: 'Noto Sans Arabic', sans-serif; }
+        .card { background: rgba(22, 27, 34, 0.9); backdrop-filter: blur(12px); border-radius: 24px; border: 1px solid rgba(255,255,255,0.05); transition: all 0.3s; }
+        .sidebar-item { cursor: pointer; transition: 0.2s; }
+        .sidebar-item.active { background: rgba(59, 130, 246, 0.15); color: #3b82f6; border-right: 3px solid #3b82f6; }
+        .hidden-section { display: none; }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden p-6 gap-6">
+
+    <aside class="w-64 flex flex-col gap-8 p-2">
+        <div class="flex items-center gap-3 px-4">
+            <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center shadow-lg shadow-blue-900/40">N</div>
+            <h1 class="text-xl font-bold tracking-widest">NEOMA</h1>
         </div>
-        
-        <div class="card p-6 flex-1">
-            <h3 class="font-bold mb-4 text-red-400">⚠️ تنبيهات النظام</h3>
-            <div class="text-[10px] text-gray-500 flex flex-col gap-3">
-                <p>• تم اكتشاف محاولة ارتباط جديدة.</p>
-                <p>• رصيد SNMA في حالة استقرار.</p>
-                <p>• تحديث الخريطة سينتهي قريباً.</p>
-            </div>
-        </div>
+        <nav class="flex flex-col gap-2" id="main-nav">
+            <div onclick="showSection('dash')" id="nav-dash" class="sidebar-item active p-4 rounded-xl flex items-center gap-3">📊 لوحة التحكم</div>
+            <div onclick="showSection('market')" id="nav-market" class="sidebar-item p-4 rounded-xl flex items-center gap-3">🛒 المتجر</div>
+            <div onclick="showSection('chat')" id="nav-chat" class="sidebar-item p-4 rounded-xl flex items-center gap-3">💬 الدردشة الذكية</div>
+        </nav>
     </aside>
 
+    <main class="flex-1 flex flex-col gap-6 overflow-y-auto">
+        
+        <section id="sect-dash" class="flex flex-col gap-6">
+            <div class="grid grid-cols-3 gap-6">
+                <div class="col-span-2 card p-8 flex items-center justify-between bg-gradient-to-l from-blue-900/20 to-transparent">
+                    <div>
+                        <h2 class="text-3xl font-bold mb-2">مرحباً، أيها المرتبط</h2>
+                        <p class="text-slate-400" id="dash-text">نيوما في حالة استقرار تام وتنتظر إشارتك.</p>
+                        <button onclick="showSection('chat')" class="mt-6 bg-blue-600 px-8 py-3 rounded-full font-bold shadow-lg hover:scale-105 transition">ابدأ المحادثة</button>
+                    </div>
+                    <div class="text-8xl animate-pulse">🦊</div>
+                </div>
+                <div class="card p-8 border-t-4 border-blue-500">
+                    <span class="text-slate-500 text-sm">الرصيد المتوفر</span>
+                    <div class="text-4xl font-bold mt-2" id="balance">1,250,000</div>
+                    <div class="text-blue-500 text-xs mt-2 font-mono">SNMA TOKEN</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="sect-market" class="hidden-section flex flex-col gap-6">
+            <h2 class="text-2xl font-bold px-2">متجر الكيانات الحية</h2>
+            <div class="grid grid-cols-3 gap-6">
+                <div class="card p-6 flex flex-col items-center gap-4 text-center">
+                    <span class="text-5xl">🐱</span>
+                    <h3 class="font-bold">قطة النيون</h3>
+                    <button onclick="buy(5000)" class="w-full py-2 bg-blue-600/20 text-blue-400 rounded-xl hover:bg-blue-600 hover:text-white transition">5,000 SNMA</button>
+                </div>
+                <div class="card p-6 flex flex-col items-center gap-4 text-center">
+                    <span class="text-5xl">🐰</span>
+                    <h3 class="font-bold">أرنب السرعة</h3>
+                    <button onclick="buy(3500)" class="w-full py-2 bg-blue-600/20 text-blue-400 rounded-xl hover:bg-blue-600 hover:text-white transition">3,500 SNMA</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="sect-chat" class="hidden-section card flex flex-col h-full overflow-hidden">
+            <div id="chat-display" class="flex-1 p-6 overflow-y-auto flex flex-col gap-4 bg-black/20">
+                <div class="bg-blue-600/10 p-4 rounded-2xl self-start max-w-[80%]">نيوما: أنا مرتبطة بوعيك الآن، كيف يمكنني مساعدتك؟</div>
+            </div>
+            <div class="p-4 bg-white/5 flex gap-2">
+                <input type="text" id="chat-input" class="flex-1 bg-transparent border border-white/10 rounded-xl px-4 outline-none" placeholder="اكتب هنا...">
+                <button onclick="sendMessage()" class="bg-blue-600 px-6 py-2 rounded-xl">ارسل</button>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        let currentBalance = 1250000;
+
+        // وظيفة التنقل بين الأقسام
+        function showSection(name) {
+            // إخفاء الكل
+            document.querySelectorAll('section').forEach(s => s.classList.add('hidden-section'));
+            document.querySelectorAll('.sidebar-item').forEach(i => i.classList.remove('active'));
+            
+            // إظهار المطلوب
+            document.getElementById('sect-' + name).classList.remove('hidden-section');
+            document.getElementById('nav-' + name).classList.add('active');
+        }
+
+        // وظيفة الشراء
+        function buy(price) {
+            if(currentBalance >= price) {
+                currentBalance -= price;
+                document.getElementById('balance').innerText = currentBalance.toLocaleString();
+                alert("تم الشراء بنجاح! تفقد حديقتك الرقمية.");
+            } else {
+                alert("الرصيد غير كافٍ.");
+            }
+        }
+
+        // وظيفة الدردشة داخل الواجهة
+        function sendMessage() {
+            const input = document.getElementById('chat-input');
+            const display = document.getElementById('chat-display');
+            if(!input.value) return;
+
+            display.innerHTML += `<div class="bg-white/5 p-4 rounded-2xl self-end max-w-[80%]">${input.value}</div>`;
+            
+            setTimeout(() => {
+                display.innerHTML += `<div class="bg-blue-600/10 p-4 rounded-2xl self-start max-w-[80%] border-r-2 border-blue-500">نيوما: هذا الارتباط ينمو مع كل كلمة تقولها.</div>`;
+                display.scrollTop = display.scrollHeight;
+            }, 1000);
+            
+            input.value = "";
+        }
+    </script>
 </body>
 </html>
