@@ -70,7 +70,12 @@
             const text = inputField.value.trim();
             if (!text) return;
 
-            // فحص الأخلاق
+            // 
+            <button type="button" id="send-btn" onclick="handleSend()" class="bg-blue-600 hover:bg-blue-500 text-white px-8 rounded-lg transition duration-500 font-light">
+    إرسال
+</button>
+                فحص الأخلاق
             const isToxic = forbiddenWords.some(word => text.includes(word));
             if (isToxic) {
                 addMessage("النظام", "نيوما لا تستقبل الكلمات الجارحة.. ار
+
